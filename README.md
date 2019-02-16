@@ -4,5 +4,5 @@
 - Model Visualisation with GRAD-CAM (https://github.com/gabrieldemarmiesse/heatmaps)
 - k-fold crossvalidation on 10folds with folders for each fold
 - VGG with rotate random crop
-## Basic NASNet
-## Basic Ensembling
+## NASNet
+## Ensembling
