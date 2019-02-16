@@ -15,7 +15,6 @@ class CyclicLR(Callback):
         A cycle that scales initial amplitude by gamma**(cycle iterations) at each 
         cycle iteration.
     For more detail, please see paper.
-    
     # Example
         ```python
             clr = CyclicLR(base_lr=0.001, max_lr=0.006,
@@ -58,7 +57,6 @@ class CyclicLR(Callback):
             cycle number or cycle iterations (training
             iterations since start of cycle). Default is 'cycle'.
     """
-
     def __init__(self, base_lr=0.001, max_lr=0.006, step_size=2000., mode='triangular',
                  gamma=1., scale_fn=None, scale_mode='cycle'):
         super(CyclicLR, self).__init__()
