@@ -4,3 +4,5 @@ VGG/.ipynb_checkpoints/k-fold crossvalidation VGG-checkpoint.ipynb
 .ipynb_checkpoints/k-fold-crossvalidation-checkpoint.ipynb
 k-fold-crossvalidation.ipynb
 clr_callback.py
+data/meta_clsloc.mat
+heatmap.py
