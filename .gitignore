@@ -6,3 +6,5 @@ k-fold-crossvalidation.ipynb
 clr_callback.py
 data/meta_clsloc.mat
 heatmap.py
+VGG/.ipynb_checkpoints/VGG_RCZ-checkpoint.ipynb
+.DS_Store
