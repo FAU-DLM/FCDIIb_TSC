@@ -1,6 +1,7 @@
 import os
 import cv2
 import pandas as pd
+import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -15,7 +16,7 @@ def looking_at_augmentation (data_generator, batchsize, path):
     fig, ax = plt.subplots(ncols=3, nrows=3)
     fig.subplots_adjust(hspace=0.5)
     plt.suptitle('Augmented Images', fontsize=16)
-    plt.figure(num=None, figsize=(50, 50), dpi=100, facecolor='w', edgecolor='k')
+    plt.figure(num=None, figsize=(5, 5), dpi=100, facecolor='w', edgecolor='k')
 
     for ax in ax.flatten():
         ax.axis('off')
@@ -27,7 +28,7 @@ def looking_at_augmentation (data_generator, batchsize, path):
         fig.set_figwidth(8)
 
     #fig.tight_layout()
-    fig.savefig(base_path + '\\Augmented-Images.png', dpi=300)
+    fig.savefig(path + '\\Augmented-Images.png', dpi=300)
 
 #fast plot of training history
 def plot_history(history, modelname, path):
@@ -49,7 +50,7 @@ def plot_history(history, modelname, path):
     hist_df.to_csv()
     plt.show();
     
-def plotting_x_history (PATH, plot_title):   
+def plotting_x_history (path, plot_title):   
     fileNames = os.listdir(PATH)
     fileNames = [file for file in fileNames if '.csv' in file]
     plt.rcParams.update({'legend.labelspacing':0.25, 'legend.fontsize': 5})
@@ -62,7 +63,7 @@ def plotting_x_history (PATH, plot_title):
     plt.legend(loc = 4)
     plt.suptitle('{}'.format(plot_title), fontsize=15)
     plt.show()
-    plt.savefig(PATH + '{}.png'.format(plot_title), dpi=100)
+    plt.savefig(path + '{}.png'.format(plot_title), dpi=100)
 
 from sklearn.metrics import roc_curve, roc_auc_score, auc#plotting the receiver operating characteristics --> evaluate performance cutting point vice
 def plot_roc(label, predictions, modelname, path): #IDEA: set diffrent cutting point based on ROC for ensembling   
@@ -132,7 +133,7 @@ def plot_correct(vals, y_pred, y_label, modelname, path):
     fig, ax = plt.subplots(ncols=3, nrows=3)
     fig.subplots_adjust(hspace=0.5)
     plt.suptitle('Correct Images', fontsize=16)
-    plt.figure(num=None, figsize=(50, 50), dpi=100, facecolor='w', edgecolor='k')
+    plt.figure(num=None, figsize=(5, 5), dpi=100, facecolor='w', edgecolor='k')
 
     for ax in ax.flatten():
         ax.axis('off')
@@ -155,7 +156,7 @@ def plot_incorrect(vals, y_pred, y_label, modelname, path):
     fig, ax = plt.subplots(ncols=3, nrows=3)
     fig.subplots_adjust(hspace=1)
     plt.suptitle('Incorrect Images', fontsize=16)
-    plt.figure(num=None, figsize=(50, 50), dpi=100, facecolor='w', edgecolor='k')
+    plt.figure(num=None, figsize=(5, 5), dpi=100, facecolor='w', edgecolor='k')
 
     for ax in ax.flatten():
         ax.axis('off')
@@ -169,19 +170,16 @@ def plot_incorrect(vals, y_pred, y_label, modelname, path):
 
     fig.savefig(path + '\Incorrect_Images_{}.png' .format(modelname), dpi=100) #saving PLOT 
     
-def auc_roc(y_true, y_pred):
-    # any tensorflow metric
-    value, update_op = tf.contrib.metrics.streaming_auc(y_pred, y_true)
-
-    # find all variables created for this metric
-    metric_vars = [i for i in tf.local_variables() if 'auc_roc' in i.name.split('/')[1]]
-
-    # Add metric variables to GLOBAL_VARIABLES collection.
-    # They will be initialized for new session.
-    for v in metric_vars:
-        tf.add_to_collection(tf.GraphKeys.GLOBAL_VARIABLES, v)
-
-    # force to update metric values
-    with tf.control_dependencies([update_op]):
-        value = tf.identity(value)
+def as_keras_metric(method):
+    import functools
+    from keras import backend as K
+    import tensorflow as tf
+    @functools.wraps(method)
+    def wrapper(self, args, **kwargs):
+        """ Wrapper for turning tensorflow metrics into keras metrics """
+        value, update_op = method(self, args, **kwargs)
+        K.get_session().run(tf.local_variables_initializer())
+        with tf.control_dependencies([update_op]):
+            value = tf.identity(value)
         return value
+    return wrapper
