@@ -1,4 +1,7 @@
 # Same same but different FCD IIb vs. TSC – distinct histomorphological features revealed with the help of deep learning
+##Introduction 
+This ipynb-notebook helps reproduce our preprocessing, training and visualisation pipeline for the publication above. The code provided features part of our pipeline, but not the whole analysis and end-to-end described software solution.
+
 ## System requirements
 
 We would suggest to create a new environment with the described dependencies. 
