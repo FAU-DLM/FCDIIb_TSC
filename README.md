@@ -13,5 +13,5 @@ Our experiments were carried out on 2x NVIDIA GeForce GTX 1080Ti using an AMD Ry
 ### Filepaths
 While running the code all filepaths need to be specified as described in the notebook. 
 
-### Tiles
-Input data should be around 2000x2000 pixels in .png in 20x magnification for histopathologic scientific questions.
+### Using your own data
+Input data should be around 2000x2000 pixels in .png in 20x magnification for scientific histopathologic questions.
