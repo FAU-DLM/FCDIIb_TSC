@@ -11,7 +11,7 @@ def get_seq():
         [
             # apply the following augmenters to most images
             iaa.Fliplr(0.5), # horizontally flip 50% of all images
-            iaa.Flipud(0.5), # vertically flip 20% of all images
+            iaa.Flipud(0.5), # vertically flip 50% of all images
             sometimes(iaa.Affine(
                 scale={"x": (0.9, 1.6), "y": (0.9, 1.6)}, #>20 will cut part of img
                 translate_percent={"x": (-0.15, 0.15), "y": (-0.15, 0.15)}, # >20% will also cut part of img
@@ -35,7 +35,7 @@ def get_seq():
                     ])),
                     iaa.AdditiveGaussianNoise(loc=0, scale=(0.0, 0.01*255), per_channel=0.2), # add gaussian noise to images
                  iaa.OneOf([
-                        iaa.Dropout((0.05, 0.3), per_channel=0.2), #rnd remove 5% in small pixels
+                        iaa.Dropout((0.05, 0.3), per_channel=0.2), #rnd remove 5-30% in small pixels
                         iaa.CoarseDropout((0.05, 0.3), size_percent=(0.01, 0.02), per_channel=0.2),# rnd remove 3% in big pixels
                     ]),
                     iaa.Invert(0.01, per_channel=True), # invert color channels

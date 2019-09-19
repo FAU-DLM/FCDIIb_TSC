@@ -28,7 +28,7 @@ def looking_at_augmentation (data_generator, batchsize, path):
         fig.set_figwidth(8)
 
     #fig.tight_layout()
-    fig.savefig(path + '\\Augmented-Images.png', dpi=300)
+    fig.savefig(path + '/Augmented-Images.png', dpi=300)
 
 #fast plot of training history
 def plot_history(history, modelname, path):
@@ -46,10 +46,11 @@ def plot_history(history, modelname, path):
     axs[1].set_xlabel('Epoch')
     axs[1].grid()
     axs[1].legend(loc=0)
-    fig.savefig(path + '\History_{}.png' .format(modelname), dpi=300)
+    fig.savefig(path + '/History_{}.png' .format(modelname), dpi=300)
     hist_df.to_csv()
     plt.show();
-    
+
+#plotting multiple .csv histories in a single plot
 def plotting_x_history (path, plot_title):   
     fileNames = os.listdir(PATH)
     fileNames = [file for file in fileNames if '.csv' in file]
@@ -65,8 +66,9 @@ def plotting_x_history (path, plot_title):
     plt.show()
     plt.savefig(path + '{}.png'.format(plot_title), dpi=100)
 
-from sklearn.metrics import roc_curve, roc_auc_score, auc#plotting the receiver operating characteristics --> evaluate performance cutting point vice
-def plot_roc(label, predictions, modelname, path): #IDEA: set diffrent cutting point based on ROC for ensembling   
+from sklearn.metrics import roc_curve, roc_auc_score, auc
+#plotting the receiver operating characteristics --> evaluate performance cutting point vice
+def plot_roc(label, predictions, modelname, path):    
     roc_auc_score(label, predictions)
     print('The ROC-Score is: {}' .format(roc_auc_score))
 
@@ -81,7 +83,7 @@ def plot_roc(label, predictions, modelname, path): #IDEA: set diffrent cutting p
     plt.ylabel('True positive rate')
     plt.title('ROC curve: {}' .format(auc_keras))
     plt.legend(loc='best')
-    fig.savefig(path + '\ROC-Curve_{}.png' .format(modelname), dpi=300) #saving PLOT 
+    fig.savefig(path + '/ROC-Curve_{}.png' .format(modelname), dpi=300) #saving PLOT 
     plt.show()
     
 from sklearn.metrics import confusion_matrix
@@ -145,7 +147,7 @@ def plot_correct(vals, y_pred, y_label, modelname, path):
         fig.set_figheight(8)
         fig.set_figwidth(8)
 
-    fig.savefig(path + '\Correct_Images_{}.png' .format(modelname), dpi=100) #saving PLOT 
+    fig.savefig(path + '/Correct_Images_{}.png' .format(modelname), dpi=100) #saving PLOT 
 
 #Plotting incorrectly classified
 def plot_incorrect(vals, y_pred, y_label, modelname, path):
@@ -168,7 +170,7 @@ def plot_incorrect(vals, y_pred, y_label, modelname, path):
         fig.set_figheight(8)
         fig.set_figwidth(8)
 
-    fig.savefig(path + '\Incorrect_Images_{}.png' .format(modelname), dpi=100) #saving PLOT 
+    fig.savefig(path + '/Incorrect_Images_{}.png' .format(modelname), dpi=100) #saving PLOT 
     
 def as_keras_metric(method):
     import functools
