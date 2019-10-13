@@ -9,7 +9,7 @@ The notebook was developed and tested on an Ubuntu 18.04 LTS Server.
 We would suggest to create a new environment with the python dependencies listed in the requirements.txt.
 
 ## Hardware requirements
-Our experiments were carried out on 2x NVIDIA GeForce GTX 1080Ti using an AMD Ryzen Threadripper 1950X 16x 3.40GHz, 128Gb RAM, CUDA 10.0 and cuDNN 7.
+Our experiments were carried out on a NVIDIA Titan Xp and a NVIDIA GeForce GTX 1080Ti using an AMD Ryzen Threadripper 1950X 16x 3.40GHz, 128Gb RAM, CUDA 10.0 and cuDNN 7.
 
 ## Using the code
 ### Filepaths
