@@ -1,4 +1,4 @@
-# Same same but different FCD IIb vs. TSC – distinct histomorphological features revealed with the help of deep learning
+# Same same but different: a web-based deep learning application revealed classifying features for the histopathologic distinction of cortical malformations
 ## bioRxiv
 ## DOI: 
 ## Introduction
