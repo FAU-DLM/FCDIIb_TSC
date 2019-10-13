@@ -35,8 +35,8 @@ def get_seq():
                     ])),
                     iaa.AdditiveGaussianNoise(loc=0, scale=(0.0, 0.01*255), per_channel=0.2), # add gaussian noise to images
                  iaa.OneOf([
-                        iaa.Dropout((0.05, 0.3), per_channel=0.2), #rnd remove 5-30% in small pixels
-                        iaa.CoarseDropout((0.05, 0.3), size_percent=(0.01, 0.02), per_channel=0.2),# rnd remove 3% in big pixels
+                        iaa.Dropout((0.05, 0.2), per_channel=0.2), #rnd remove 5-30% in small pixels
+                        iaa.CoarseDropout((0.05, 0.2), size_percent=(0.01, 0.02), per_channel=0.2),# rnd remove 3% in big pixels
                     ]),
                     iaa.Invert(0.01, per_channel=True), # invert color channels
                     iaa.Add((-10, 10), per_channel=0.3), # change brightness of images (by -10 to 10 of original value)
@@ -44,14 +44,14 @@ def get_seq():
                     #
                     #either change the brightness of the whole image (sometimes per channel) or change the brightness of subareas
                     iaa.OneOf([
-                        iaa.Multiply((0.9, 1.2), per_channel=0.5),
+                        iaa.Multiply((0.9, 1.1), per_channel=0.5),
                         iaa.FrequencyNoiseAlpha(
                             exponent=(-1, 0),
                             first=iaa.Multiply((0.9, 1.1), per_channel=True),
-                            second=iaa.ContrastNormalization((0.9, 1.1))
+                            second=iaa.LinearContrast((0.9, 1.1))
                         )
                     ]),
-                    sometimes(iaa.ElasticTransformation(alpha=(0, 0.5), sigma=0.1)), #still not sure: move pixels locally around
+                    sometimes(iaa.ElasticTransformation(alpha=(0, 0.2), sigma=0.1)), #still not sure: move pixels locally around
                     sometimes(iaa.PiecewiseAffine(scale=(0.01, 0.03))), #still not sure:move parts of the image around
                     sometimes(iaa.PerspectiveTransform(scale=(0.01, 0.1)))
                 ],
@@ -68,4 +68,4 @@ def aug(X):
     X=seq.augment_images(X) 
     X=np.asarray(X[0])
     X=preprocess_input(X.astype(np.float32))
-    return X           
+    return X  
