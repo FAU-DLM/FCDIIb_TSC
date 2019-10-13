@@ -1,6 +1,8 @@
-# Same same but different FCD IIb vs. TSC – distinct histomorphological features revealed with the help of deep learning
+# Same same but different: a web-based deep learning application revealed classifying features for the histopathologic distinction of cortical malformations
+## bioRxiv
+## DOI: 
 ## Introduction
-The FCD_Tuber_Workflow.ipynb notebook in combination with the utils helps to reproduce our pipeline for the publication above. The code provided features part of our pipeline (preprocessing, training and visualization), but not the whole analysis and end-to-end described software solution.
+This repository contains the FCD_Tuber_Workflow.ipynb notebook in combination with the utils to help reproduce our pipeline for the publication above. The code provided features part of our pipeline (preprocessing, training and visualization), but not the whole analysis and end-to-end described software solution.
 
 ## System requirements
 The notebook was developed and tested on an Ubuntu 18.04 LTS Server.
@@ -14,4 +16,5 @@ Our experiments were carried out on 2x NVIDIA GeForce GTX 1080Ti using an AMD Ry
 While running the code all filepaths need to be specified as described in the notebook. 
 
 ### Using your own data
-Input data should be around 2000x2000 pixels in .png in 20x magnification for scientific histopathologic questions.
+Input data should be around 2000x2000 pixels in .png in 20x magnification for scientific histopathologic questions if you want to use our random-rotate-zoom preprocessing. 
+For finer Guided GradCAMs use a model trained on smaller tiles or crops of tiles (300x300).
