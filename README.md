@@ -1,6 +1,6 @@
 # Same same but different: a web-based deep learning application revealed classifying features for the histopathologic distinction of cortical malformations
-## bioRxiv
-## DOI: 
+## bioRxiv 804682
+## DOI: https://doi.org/10.1101/804682
 ## Introduction
 This repository contains the FCD_Tuber_Workflow.ipynb notebook in combination with the utils to help reproduce our pipeline for the publication above. The code provided features part of our pipeline (preprocessing, training and visualization), but not the whole analysis and end-to-end described software solution.
 
